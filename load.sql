@@ -9,7 +9,7 @@ drop table if exists Affiliations;
 
 create table Laureates(
     id int primary key,
-    lid int not null
+    nid int not null
 );
 
 create table Person(
