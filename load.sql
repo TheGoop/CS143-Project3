@@ -8,7 +8,7 @@ drop table if exists Prize;
 drop table if exists Affiliations;
 
 create table Laureates(
-    id int primary key,
+    id int,
     nid int
 );
 
@@ -37,7 +37,7 @@ create table Place(
 );
 
 create table Prize(
-    id int primary key, 
+    id int, 
     year int, 
     category varchar(255),
     sortOrder int, 

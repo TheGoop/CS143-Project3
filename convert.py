@@ -53,7 +53,7 @@ def loadDelFiles(laureateSet, personSet, placeSet, organizationSet, birthSet, pr
     for k, v in d.items():
         filename = k + ".del"
         tupSet = v
-        print (f"Loading {filename}...")
+        # print (f"Loading {filename}...")
         with open(filename, "w") as fd:
             for tup in tupSet:
                 line = ""
@@ -97,12 +97,12 @@ def handleData(data):
             birthSet.add(birthTuple)
 
 
-            print (attrs["id"])
+            # print (attrs["id"])
             for prize in attrs["nobelPrizes"]:
                 laureateTuple = (attrs["id"], pid)
                 laureateSet.add(laureateTuple)
                 for affiliate in prize["affiliations"]:
-                    print (affiliate)
+                    # print (affiliate)
                     affiliateID = hash(affiliate["name"]) % 2147483647
                     prizeTuple = (pid, prize["awardYear"], prize["category"], prize["sortOrder"], affiliateID)
                     if debug: print (f"Prize: {prizeTuple}")
@@ -139,16 +139,16 @@ def handleData(data):
             birthTuple = (attrs["id"], attrs["birthDate"], placeID)
             if debug: print (f"Birth: {birthTuple}")
             birthSet.add(birthTuple)
-
+            print("Person: " + str(attrs["id"]))
             for prize in attrs["nobelPrizes"]:
                 laureateTuple = (attrs["id"], pid)
                 if debug: print (f"Laureate: {laureateTuple}")
                 laureateSet.add(laureateTuple)
-
+                print ("Prize:")
                 for affiliate in prize["affiliations"]:
                     affiliateID = hash(affiliate["name"]) % 2147483647
                     prizeTuple = (pid, prize["awardYear"], prize["category"], prize["sortOrder"], affiliateID)
-                    if debug: print (f"Prize: {prizeTuple}")
+                    print (f"Prize: {prizeTuple}")
                     prizeSet.add(prizeTuple)
 
                     placeID = makePlaceID(affiliate["city"], affiliate["country"])
@@ -156,7 +156,7 @@ def handleData(data):
                     if debug: print(f"Affiliate Place: {placeTuple}")
                     placeSet.add(placeTuple)
                     affiliateTuple = (affiliateID, affiliate["name"], placeID)
-                    if debug: print(f"Affiliate: {affiliateTuple}")
+                    print(f"Affiliate: {affiliateTuple}")
                     affiliationSet.add(affiliateTuple)
 
                 pid += 1
