@@ -16,11 +16,11 @@ $output = (object) [
 ];
 $sql_main = "SELECT l.id, givenName, familyName, gender, birthdate, city, country FROM Laureates l, Person p, Birth b, Place pl WHERE l.id=p.id AND l.id=b.id AND b.pid=pl.id AND l.id=" . $_GET['id'] ;
 $result = $conn->query($sql_main);
-echo "<p>hi<p>";
+
 if ($result->num_rows > 0) {
   // output data of each row
   while($row = $result->fetch_assoc()) {
-  	echo "Hello";
+  
     if ($row["givenName"] != "null") {
       $output["givenName"] = ["en" => $row["givenName"]];
     }

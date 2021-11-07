@@ -2,7 +2,8 @@ import json
 
 # load data
 # data = json.load(open("/home/cs143/data/nobel-laureates.json", "r"))
-data = json.load(open("/home/cs143/shared/proj3/data/nobel-laureates.json", "r"))
+data = json.load(open("/home/cs143/shared/project3/CS143-Project3/data/nobel-laureates.json", "r"))
+#data = json.load(open("/home/cs143/shared/proj3/data/nobel-laureates.json", "r"))
 delimiter = "$"
 
 def get(d, args):
