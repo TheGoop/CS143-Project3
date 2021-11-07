@@ -9,39 +9,39 @@ drop table if exists Affiliations;
 
 create table Laureates(
     id int primary key,
-    nid int not null
+    nid int
 );
 
 create table Person(
     id int primary key, 
-    givenName varchar(255) not null,
-    familyName varchar(255) not null,
-    gender varchar(6) not null -- we only have male/female in our data
+    givenName varchar(255),
+    familyName varchar(255),
+    gender varchar(6) -- we only have male/female in our data
 );
 
 create table Organization(
     id int primary key, 
-    orgName varchar(255) not null
+    orgName varchar(255)
 );
 
 create table Birth(
     id int primary key,
-    birthdate date not null, 
-    pid int not null
+    birthdate date, 
+    pid int
 );
 
 create table Place(
     id int primary key, 
-    city varchar(255) not null,
-    country varchar(255) not null
+    city varchar(255),
+    country varchar(255)
 );
 
 create table Prize(
     id int primary key, 
-    year int not null, 
-    category varchar(255) not null,
-    sortOrder int not null, 
-    aid int not null
+    year int, 
+    category varchar(255),
+    sortOrder int, 
+    aid int
 );
 
 create table Affiliations(
