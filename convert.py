@@ -3,7 +3,7 @@ import json
 # load data
 # data = json.load(open("/home/cs143/data/nobel-laureates.json", "r"))
 data = json.load(open("/home/cs143/shared/proj3/data/nobel-laureates.json", "r"))
-delimiter = ";"
+delimiter = "$"
 
 def get(d, args):
     for arg in args:
@@ -58,7 +58,7 @@ def loadDelFiles(laureateSet, personSet, placeSet, organizationSet, birthSet, pr
             for tup in tupSet:
                 line = ""
                 for col in tup:
-                    line += str(col) + ";"
+                    line += str(col) + delimiter
                 line = line + "\n"
                 fd.write(line)
 

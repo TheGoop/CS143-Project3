@@ -50,10 +50,10 @@ create table Affiliations(
     pid int
 );
 
-load data local infile './laureate.del' into table Laureates fields terminated by ';';
-load data local infile './birth.del' into table Birth fields terminated by ";";
-load data local infile './organization.del' into table Organization fields terminated by ";";
-load data local infile './person.del' into table Person fields terminated by ";";
-load data local infile './place.del' into table Place fields terminated by ";";
-load data local infile './prize.del' into table Prize fields terminated by ";";
-load data local infile './affiliations.del' into table Affiliations fields terminated by ";";
+load data local infile './laureate.del' into table Laureates fields terminated by '$';
+load data local infile './birth.del' into table Birth fields terminated by "$";
+load data local infile './organization.del' into table Organization fields terminated by "$";
+load data local infile './person.del' into table Person fields terminated by "$";
+load data local infile './place.del' into table Place fields terminated by "$";
+load data local infile './prize.del' into table Prize fields terminated by "$";
+load data local infile './affiliations.del' into table Affiliations fields terminated by "$";
