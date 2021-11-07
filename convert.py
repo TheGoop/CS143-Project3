@@ -52,7 +52,7 @@ def loadDelFiles(laureateSet, personSet, placeSet, organizationSet, birthSet, pr
     for k, v in d.items():
         filename = k + ".del"
         tupSet = v
-        print (f"Loading {filename}...")
+        # print (f"Loading {filename}...")
         with open(filename, "w") as fd:
             for tup in tupSet:
                 line = ""
@@ -96,12 +96,12 @@ def handleData(data):
             birthSet.add(birthTuple)
 
 
-            print (attrs["id"])
+            # print (attrs["id"])
             for prize in attrs["nobelPrizes"]:
                 laureateTuple = (attrs["id"], pid)
                 laureateSet.add(laureateTuple)
                 for affiliate in prize["affiliations"]:
-                    print (affiliate)
+                    # print (affiliate)
                     affiliateID = hash(affiliate["name"]) % 2147483647
                     prizeTuple = (pid, prize["awardYear"], prize["category"], prize["sortOrder"], affiliateID)
                     if debug: print (f"Prize: {prizeTuple}")
