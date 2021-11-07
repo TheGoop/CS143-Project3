@@ -37,7 +37,7 @@ def parseNobelPrizes(nobelPrizes):
     return prizes 
 
 def makePlaceID(city, country):
-    return hash(city + ", " + country)
+    return hash(city + ", " + country) % 2147483647
 
 def loadDelFiles(laureateSet, personSet, placeSet, organizationSet, birthSet, prizeSet, affiliationSet):
 
@@ -48,6 +48,7 @@ def loadDelFiles(laureateSet, personSet, placeSet, organizationSet, birthSet, pr
     d["organization"] = organizationSet
     d["birth"] = birthSet 
     d["prize"] = prizeSet
+    d["affiliations"] = affiliationSet
 
     for k, v in d.items():
         filename = k + ".del"
@@ -58,12 +59,8 @@ def loadDelFiles(laureateSet, personSet, placeSet, organizationSet, birthSet, pr
                 line = ""
                 for col in tup:
                     line += str(col) + ";"
-                line = line[:-1] + "\n"
+                line = line + "\n"
                 fd.write(line)
-
-            
-    
-
 
 def handleData(data):
     # affiliate ids - just hash the name of the affiliate
@@ -110,7 +107,7 @@ def handleData(data):
                 laureateSet.add(laureateTuple)
 
                 for affiliate in prize["affiliations"]:
-                    affiliateID = hash(affiliate["name"])
+                    affiliateID = hash(affiliate["name"]) % 2147483647
                     prizeTuple = (pid, prize["awardYear"], prize["category"], prize["sortOrder"], affiliateID)
                     if debug: print (f"Prize: {prizeTuple}")
                     prizeSet.add(prizeTuple)
