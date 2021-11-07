@@ -25,7 +25,7 @@ create table Organization(
 );
 
 create table Birth(
-    id int primary key,
+    id int,
     birthdate date, 
     pid int
 );
@@ -45,7 +45,7 @@ create table Prize(
 );
 
 create table Affiliations(
-    id int primary key, 
+    id int, 
     affiliationName varchar(255),
     pid int
 );
