@@ -40,7 +40,6 @@ def makePlaceID(city, country):
     return hash(city + ", " + country) % 2147483647
 
 def loadDelFiles(laureateSet, personSet, placeSet, organizationSet, birthSet, prizeSet, affiliationSet):
-
     d = dict()
     d["laureate"] = laureateSet
     d["person"] = personSet
@@ -77,7 +76,46 @@ def handleData(data):
     for ind, laureate in enumerate(data["laureates"]):
         if debug: print ("-------")
         if "orgName" in laureate:
-            pass
+            attrVals = [["id"], ["orgName", "en"],
+                    ["founded", "date"], ["founded", "place", "city", "en"], ["founded", "place", "country", "en"],
+                    ["nobelPrizes"]]
+            attrKeys = ["id", "orgName", "birthDate", "birthCity", "birthCountry", "nobelPrizes"]
+            attrs = dict()
+            for i in range(len(attrKeys)):
+                attrs[attrKeys[i]] = get(laureate, attrVals[i])
+            attrs["nobelPrizes"] = parseNobelPrizes(attrs["nobelPrizes"])
+
+            organizationTuple = (attrs["id"], attrs["orgName"])
+            organizationSet.add(organizationTuple)
+
+            placeID = makePlaceID(attrs["birthDate"], attrs["birthCountry"])
+            placeTuple = (placeID, attrs["birthDate"], attrs["birthCountry"])
+            placeSet.add(placeTuple)
+
+            birthTuple = (attrs["id"], attrs["birthDate"], placeID)
+            birthSet.add(birthTuple)
+
+
+            print (attrs["id"])
+            for prize in attrs["nobelPrizes"]:
+                laureateTuple = (attrs["id"], pid)
+                laureateSet.add(laureateTuple)
+                for affiliate in prize["affiliations"]:
+                    print (affiliate)
+                    affiliateID = hash(affiliate["name"]) % 2147483647
+                    prizeTuple = (pid, prize["awardYear"], prize["category"], prize["sortOrder"], affiliateID)
+                    if debug: print (f"Prize: {prizeTuple}")
+                    prizeSet.add(prizeTuple)
+
+                    placeID = makePlaceID(affiliate["city"], affiliate["country"])
+                    placeTuple = (placeID, affiliate["city"], affiliate["country"])
+                    if debug: print(f"Affiliate Place: {placeTuple}")
+                    placeSet.add(placeTuple)
+                    affiliateTuple = (affiliateID, affiliate["name"], placeID)
+                    if debug: print(f"Affiliate: {affiliateTuple}")
+                    affiliationSet.add(affiliateTuple)
+                pid += 1
+
         else:
             attrVals = [["id"], ["givenName", "en"], ["familyName", "en"], ["gender"],
                     ["birth", "date"], ["birth", "place", "city", "en"], ["birth", "place", "country", "en"],
@@ -121,6 +159,7 @@ def handleData(data):
                     affiliationSet.add(affiliateTuple)
 
                 pid += 1
+        
 
     loadDelFiles(laureateSet, personSet, placeSet, organizationSet, birthSet, prizeSet, affiliationSet)
 

@@ -57,3 +57,7 @@ load data local infile './person.del' into table Person fields terminated by "$"
 load data local infile './place.del' into table Place fields terminated by "$";
 load data local infile './prize.del' into table Prize fields terminated by "$";
 load data local infile './affiliations.del' into table Affiliations fields terminated by "$";
+
+-- select id from Person where givenName = "Marie" and familyName = "Curie"; -- 1
+-- select Country from Affiliations inner join Place on pid = Place.id where affiliationName = "CERN"; -- 2
+
